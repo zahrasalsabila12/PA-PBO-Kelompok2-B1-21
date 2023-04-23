@@ -11,6 +11,7 @@ public class Main{
     static ArrayList<Makeup> data2 = new ArrayList<>();
 
     static BufferedReader baca = new BufferedReader(new InputStreamReader(System.in));
+    
 
     //menambahkan data
     static void createData() throws IOException{
@@ -270,14 +271,33 @@ public class Main{
     }
 
     public static void main(String[] args) throws IOException {
+        Scanner input = new Scanner(System.in);
+        String username, password;
+
+    while(true){
+        System.out.println("""
+****************************************************************
+                           Beauty Shop
+****************************************************************
+                        Welcome Login Page 
+================================================================""");
+    System.out.print("Masukkan username: ");
+    username = input.nextLine();
+    System.out.println("================================================================");
+    System.out.print("Masukkan password: ");
+    password = input.nextLine();
+        
+    if (username.equals("admin") && password.equals("admin123")) {
+        System.out.println("================================================================");
+        System.out.println("              ANDA BERHASIL LOGIN SEBAGAI ADMIN");
 
         int pilihan = 0;
         do {
             System.out.println("""
 ****************************************************************
-                        Beauty Shop
+                         Beauty Shop
 ****************************************************************
-                         Main Menu 
+                       Main Menu Admin
 ================================================================
 1. Tambah Data Kosmetik
 2. Lihat Data Kosmetik    
@@ -285,7 +305,7 @@ public class Main{
 4. Hapus Data Kosmetik
 5. Keluar
 ================================================================""");
-            System.out.print(" Pilihan Anda [1-6]: ");
+            System.out.print(" Pilihan Anda [1-5]: ");
             pilihan = Integer.parseInt(baca.readLine());
 
             switch (pilihan) {
@@ -310,12 +330,23 @@ public class Main{
                     System.out.println("================================================================");
                     System.out.println("                       Terima Kasih");
                     System.out.println("================================================================");
-                    System.exit(0);
+                    break;
                 default:
                 System.out.println("================================================================");
                 System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
                     break;
             }
         } while (pilihan != 5);
-    }
+    } else if 
+        (username.equals("user") && password.equals("user123")) {
+            System.out.println("================================================================");
+            System.out.println("              ANDA BERHASIL LOGIN SEBAGAI USER");
+        }
+    else {
+        System.out.println("================================================================");
+        System.out.println("                USERNAME ATAU PASSWORD SALAH!                   ");
+        System.out.println("      >>> SILAHKAN MASUKAN PASSWORD DAN USERNMAE YANG BENAR <<< ");
+        }
+    } 
+}
 }
