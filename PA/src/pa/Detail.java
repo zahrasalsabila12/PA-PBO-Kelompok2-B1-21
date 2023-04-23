@@ -53,7 +53,7 @@ public final class Detail implements Fail{ //implementation interface
     @Override
     public void failChoose(){
         System.out.println("----------------------------------------------------------------");
-        System.out.println(" Pilihan tidak ada.");
+        System.out.println(" Pilihan tidak ada");
         System.out.println("----------------------------------------------------------------");
     }
 
