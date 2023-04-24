@@ -187,8 +187,21 @@ public class Main{
                     }else{
                         info.notifyFailUpdate();
                         System.out.println("Silahkan melihat data yang ingin diubah terlebih dahulu");
-                        readData();
-                        break;
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("                        DATA SKIN CARE");
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.print(" Ingin Melihat Data Secara Lengkap? [y/t] : ");
+                        String pilih = baca.readLine();
+                        System.out.println("----------------------------------------------------------------");
+                        for(int i = 0; i < data1.size(); i++){
+                            if (pilih.equals("Y") || pilih.equals("y")){
+                                System.out.println(" Data Ke-" + (i+1));
+                                data1.get(i).displayInfo();
+                            }else{
+                                System.out.println(" Data Ke-" + (i+1));
+                                data1.get(i).displayInfo(false);
+                            }
+                        }
                     }
                 }
             }
@@ -212,8 +225,21 @@ public class Main{
                     }else{
                         info.notifyFailUpdate();
                         System.out.println("Silahkan melihat data yang ingin diubah terlebih dahulu");
-                        readData();
-                        break;
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("                         DATA MAKE UP");
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.print(" Ingin Melihat Data Secara Lengkap? [y/t] : ");
+                        String pilih1 = baca.readLine();
+                        System.out.println("----------------------------------------------------------------");
+                        for(int i = 0; i < data2.size(); i++){
+                            if (pilih1.equals("Y") || pilih1.equals("y")){
+                                System.out.println(" Data Ke-" + (i+1));
+                                data2.get(i).displayInfo();
+                            }else{
+                                System.out.println(" Data Ke-" + (i+1));
+                                data2.get(i).displayInfo(false);
+                            }
+                        }
                     }
                 }
             }
@@ -246,8 +272,21 @@ public class Main{
                 }else{
                     info.notifyFailDelete();
                     System.out.println(" Silahkan melihat data yang ingin dihapus terlebih dahulu");
-                    readData();
-                    break;
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("                        DATA SKIN CARE");
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.print(" Ingin Melihat Data Secara Lengkap? [y/t] : ");
+                    String pilih = baca.readLine();
+                    System.out.println("----------------------------------------------------------------");
+                    for(int index = 0; index < data1.size(); index++){
+                        if (pilih.equals("Y") || pilih.equals("y")){
+                            System.out.println(" Data Ke-" + (index+1));
+                            data1.get(index).displayInfo();
+                        }else{
+                            System.out.println(" Data Ke-" + (index+1));
+                            data1.get(index).displayInfo(false);
+                        }
+                    }
                 }
             }
         }else if  (delete == 2){
@@ -261,8 +300,21 @@ public class Main{
                 }else{
                     info.notifyFailDelete();
                     System.out.println(" Silahkan melihat data yang ingin dihapus terlebih dahulu");
-                    readData();
-                    break;
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("                         DATA MAKE UP");
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.print(" Ingin Melihat Data Secara Lengkap? [y/t] : ");
+                    String pilih1 = baca.readLine();
+                    System.out.println("----------------------------------------------------------------");
+                    for(int index = 0; index < data2.size(); index++){
+                        if (pilih1.equals("Y") || pilih1.equals("y")){
+                            System.out.println(" Data Ke-" + (index+1));
+                            data2.get(index).displayInfo();
+                        }else{
+                            System.out.println(" Data Ke-" + (index+1));
+                            data2.get(index).displayInfo(false);
+                        }
+                    }
                 }
             }
         }else{
