@@ -14,17 +14,17 @@ public class Main{
 
     static BufferedReader baca = new BufferedReader(new InputStreamReader(System.in));
     
-
+    
     //menambahkan data
     static void createData() throws IOException{
         Detail info = new Detail();
         System.out.println("""
-================================================================
-                         Tambah Data
-================================================================
- 1. Skin Care
- 2. Make Up
-================================================================""");
+        ================================================================
+                                 Tambah Data
+        ================================================================
+         1. Skin Care
+         2. Make Up
+        ================================================================""");
         System.out.print("Pilihan Anda [1/2] : ");
         int tambah = Integer.parseInt(baca.readLine());
         
@@ -101,12 +101,12 @@ public class Main{
     static void readData() throws IOException{
         Detail info = new Detail();
         System.out.println("""
-================================================================
-                         Lihat Data
-================================================================
- 1. Skin Care
- 2. Make Up
-================================================================""");
+        ================================================================
+                                 Lihat Data
+        ================================================================
+         1. Skin Care
+         2. Make Up
+        ================================================================""");
         System.out.print("Pilihan Anda [1/2] : ");
         int lihat = Integer.parseInt(baca.readLine());
 
@@ -161,12 +161,12 @@ public class Main{
     static void  updateData() throws IOException {
         Detail info = new Detail();
         System.out.println("""
-================================================================
-                        Update Data 
-================================================================
- 1. Skin Care
- 2. Make Up
-================================================================""");
+        ================================================================
+                                Update Data 
+        ================================================================
+         1. Skin Care
+         2. Make Up
+        ================================================================""");
         System.out.print("Pilihan Anda [1/2] : ");
         int update = Integer.parseInt(baca.readLine());
 
@@ -222,19 +222,18 @@ public class Main{
         }else{
             info.failChoose();
         }
-
     }
 
     //menghapus data
     static void deleteData() throws IOException{
         Detail info = new Detail();
         System.out.println("""
-================================================================
-                       Menghapus Data
-================================================================
- 1. Skin Care
- 2. Make Up
- ================================================================""");
+        ================================================================
+                               Menghapus Data
+        ================================================================
+         1. Skin Care
+         2. Make Up
+        ================================================================""");
         System.out.print("Pilihan Anda [1/2] : ");
         int delete = Integer.parseInt(baca.readLine());
         if (delete == 1){
@@ -271,7 +270,8 @@ public class Main{
             info.failChoose();
         }
     }
-        static void createDataKeranjang() throws IOException{
+    static void createDataKeranjang() throws IOException{
+        
     }
     
     static void readDataKeranjang() throws IOException {
@@ -298,7 +298,6 @@ public class Main{
                     keranjangSC.get(i).displayInfo();
                 }
                 System.out.println("----------------------------------------------------------------");
-
             }
         }
         else if (jumlah == 2){
@@ -320,7 +319,7 @@ public class Main{
         }
     }
     
-        static void  updateDataKeranjang() throws IOException {
+    static void  updateDataKeranjang() throws IOException {
         Detail info = new Detail();
         System.out.println("""
         ================================================================
@@ -398,18 +397,17 @@ public class Main{
         }else{
             info.failChoose();
         }
-
     }
     
     static void deleteDataKeranjang() throws IOException{
         Detail info = new Detail();
         System.out.println("""
-================================================================
-                  Menghapus Data Keranjang
-================================================================
- 1. Skin Care
- 2. Make Up
- ================================================================""");
+        ================================================================
+                          Menghapus Data Keranjang
+        ================================================================
+         1. Skin Care
+         2. Make Up
+        ================================================================""");
         System.out.print("Pilihan Anda [1/2] : ");
         int delete = Integer.parseInt(baca.readLine());
         if (delete == 1){
@@ -451,144 +449,142 @@ public class Main{
         Scanner input = new Scanner(System.in);
         String username, password;
 
-    while(true){
-        System.out.println("""
-****************************************************************
-                           Beauty Shop
-****************************************************************
-                        Welcome Login Page 
-================================================================""");
-    System.out.print("Masukkan username: ");
-    username = input.nextLine();
-    System.out.println("================================================================");
-    System.out.print("Masukkan password: ");
-    password = input.nextLine();
-        
-    if (username.equals("admin") && password.equals("admin123")) {
-        System.out.println("================================================================");
-        System.out.println("              ANDA BERHASIL LOGIN SEBAGAI ADMIN");
-
-        int pilihan = 0;
-        do {
+        while(true){
             System.out.println("""
-****************************************************************
-                         Beauty Shop
-****************************************************************
-                       Main Menu Admin
-================================================================
-1. Tambah Data Kosmetik
-2. Lihat Data Kosmetik    
-3. Ubah Data Kosmetik
-4. Hapus Data Kosmetik
-5. Keluar
-================================================================""");
-            System.out.print(" Pilihan Anda [1-5]: ");
-            pilihan = Integer.parseInt(baca.readLine());
-
-            switch (pilihan) {
-                case 1:
-                    //Tambah data
-                    createData();
-                    break;
-                case 2:
-                    //Lihat data
-                    readData();
-                    break;
-                case 3:
-                    //Ubah data
-                    updateData();
-                    break;
-                case 4:
-                    //hapus data
-                    deleteData();
-                    break;
-                case 5:
-                    //keluar
-                    System.out.println("================================================================");
-                    System.out.println("                       Terima Kasih");
-                    System.out.println("================================================================");
-                    break;
-                default:
-                System.out.println("================================================================");
-                System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
-                    break;
-            }
-        } while (pilihan != 5);
-    } else if 
-        (username.equals("user") && password.equals("user123")) {
+            ****************************************************************
+                                       Beauty Shop
+            ****************************************************************
+                                    Welcome Login Page 
+            ================================================================""");
+            System.out.print("Masukkan username: ");
+            username = input.nextLine();
             System.out.println("================================================================");
-            System.out.println("              ANDA BERHASIL LOGIN SEBAGAI USER");
-            int pilihan = 0;
-            do {
-                System.out.println("""
-                ****************************************************************
-                                         Beauty Shop
-                ****************************************************************
-                                       Main Menu User
-                ================================================================
-                1. Lihat Data Kosmetik
-                2. Keranjang
-                3. Pemesanan
-                4. Keluar
-                ================================================================""");
-                System.out.print(" Pilihan Anda [1-4]: ");
-                pilihan = Integer.parseInt(baca.readLine());
+            System.out.print("Masukkan password: ");
+            password = input.nextLine();
 
-                switch (pilihan) {
-                    case 1:
-                        //Lihat Data
-                        readData();
-                        createDataKeranjang();
-                        break;
-                    case 2:
-                        //Cek Keranjang
-                        do {
-                            System.out.println("""
-                            ****************************************************************
-                                                     Beauty Shop
-                            ****************************************************************
-                                                      Keranjang
-                            ================================================================
-                            1. Ubah Jumlah Barang
-                            2. Hapus Barang
-                            3. Keluar
-                            ================================================================""");
-                            System.out.print(" Pilihan Anda [1-3]: ");
-                            pilihan = Integer.parseInt(baca.readLine());
-                            switch(pilihan){
-                                case 1 :
-                                    //ubah jumlah barang
-                                    updateDataKeranjang();
-                                    break;
-                                case 2 :
-                                    //hapus barang
-                                    deleteDataKeranjang();
-                                    break;
-                                case 3 :
-                                    break;
-                            }
-                        } while(pilihan!= 3);
-                    case 3:
-                        //Pemesanan
-                        break;
-                    case 4:
-                        //keluar
+            if (username.equals("admin") && password.equals("admin123")) {
+                System.out.println("================================================================");
+                System.out.println("              ANDA BERHASIL LOGIN SEBAGAI ADMIN");
+
+                int pilihan = 0;
+                do {
+                    System.out.println("""
+                    ****************************************************************
+                                             Beauty Shop
+                    ****************************************************************
+                                           Main Menu Admin
+                    ================================================================
+                    1. Tambah Data Kosmetik
+                    2. Lihat Data Kosmetik    
+                    3. Ubah Data Kosmetik
+                    4. Hapus Data Kosmetik
+                    5. Keluar
+                    ================================================================""");
+                    System.out.print(" Pilihan Anda [1-5]: ");
+                    pilihan = Integer.parseInt(baca.readLine());
+
+                    switch (pilihan) {
+                        case 1:
+                            //Tambah data
+                            createData();
+                            break;
+                        case 2:
+                            //Lihat data
+                            readData();
+                            break;
+                        case 3:
+                            //Ubah data
+                            updateData();
+                            break;
+                        case 4:
+                            //hapus data
+                            deleteData();
+                            break;
+                        case 5:
+                            //keluar
+                            System.out.println("================================================================");
+                            System.out.println("                       Terima Kasih");
+                            System.out.println("================================================================");
+                            break;
+                        default:
                         System.out.println("================================================================");
-                        System.out.println("                       Terima Kasih");
-                        System.out.println("================================================================");
-                        break;
-                    default:
-                    System.out.println("================================================================");
-                    System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
-                        break;
-                }
-            } while (pilihan != 4);
+                        System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
+                            break;
+                    }
+                } while (pilihan != 5);
+            } else if (username.equals("user") && password.equals("user123")) {
+                System.out.println("================================================================");
+                System.out.println("              ANDA BERHASIL LOGIN SEBAGAI USER");
+                int pilihan = 0;
+                do {
+                    System.out.println("""
+                    ****************************************************************
+                                             Beauty Shop
+                    ****************************************************************
+                                           Main Menu User
+                    ================================================================
+                    1. Lihat Data Kosmetik
+                    2. Keranjang
+                    3. Pemesanan
+                    4. Keluar
+                    ================================================================""");
+                    System.out.print(" Pilihan Anda [1-4]: ");
+                    pilihan = Integer.parseInt(baca.readLine());
+
+                    switch (pilihan) {
+                        case 1:
+                            //Lihat Data
+                            readData();
+                            createDataKeranjang();
+                            break;
+                        case 2:
+                            //Cek Keranjang
+                            do {
+                                System.out.println("""
+                                ****************************************************************
+                                                         Beauty Shop
+                                ****************************************************************
+                                                          Keranjang
+                                ================================================================
+                                1. Ubah Jumlah Barang
+                                2. Hapus Barang
+                                3. Keluar
+                                ================================================================""");
+                                System.out.print(" Pilihan Anda [1-3]: ");
+                                pilihan = Integer.parseInt(baca.readLine());
+                                switch(pilihan){
+                                    case 1 :
+                                        //ubah jumlah barang
+                                        updateDataKeranjang();
+                                        break;
+                                    case 2 :
+                                        //hapus barang
+                                        deleteDataKeranjang();
+                                        break;
+                                    case 3 :
+                                        break;
+                                }
+                            } while(pilihan!= 3);
+                        case 3:
+                            //Pemesanan
+                            break;
+                        case 4:
+                            //keluar
+                            System.out.println("================================================================");
+                            System.out.println("                       Terima Kasih");
+                            System.out.println("================================================================");
+                            break;
+                        default:
+                            System.out.println("================================================================");
+                            System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
+                            break;
+                    }
+                } while (pilihan != 4);
+            } else {
+                System.out.println("================================================================");
+                System.out.println("                USERNAME ATAU PASSWORD SALAH!                   ");
+                System.out.println("      >>> SILAHKAN MASUKAN PASSWORD DAN USERNMAE YANG BENAR <<< ");
+            }
         }
-    else {
-        System.out.println("================================================================");
-        System.out.println("                USERNAME ATAU PASSWORD SALAH!                   ");
-        System.out.println("      >>> SILAHKAN MASUKAN PASSWORD DAN USERNMAE YANG BENAR <<< ");
-        }
-    } 
-}
+    }
 }
