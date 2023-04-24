@@ -23,7 +23,7 @@ public class KeranjangMU extends Kosmetik{
     
 
     public String getIdMakeup() {
-        return idMakeup + "XMXU";
+        return idMakeup;
     }
 
     public void setIdMakeup(String idMakeup) {

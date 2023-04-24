@@ -13,7 +13,7 @@ public class Skincare extends Kosmetik{
     }
     
     public String getIdSkincare() {
-        return idSkincare + "XSXC";
+        return idSkincare;
     }
 
     public void setIdSkincare(String idSkincare) {

@@ -11,9 +11,8 @@ public class Main{
     static ArrayList<Makeup> data2 = new ArrayList<>();
     static ArrayList<KeranjangSC> keranjangSC = new ArrayList<>();
     static ArrayList<KeranjangMU> keranjangMU = new ArrayList<>();
-
-    static BufferedReader baca = new BufferedReader(new InputStreamReader(System.in));
     
+    static BufferedReader baca = new BufferedReader(new InputStreamReader(System.in));
     
     //menambahkan data
     static void createData() throws IOException{
@@ -188,7 +187,6 @@ public class Main{
                         break;
                     }else{
                         info.notifyFailUpdate();
-                        System.out.println("Silahkan melihat data yang ingin diubah terlebih dahulu");
                         System.out.println("----------------------------------------------------------------");
                         System.out.println("                        DATA SKIN CARE");
                         System.out.println("----------------------------------------------------------------");
@@ -204,6 +202,7 @@ public class Main{
                                 data1.get(i).displayInfo(false);
                             }
                         }
+                        break;
                     }
                 }
             }
@@ -323,7 +322,100 @@ public class Main{
         }
     }
     static void createDataKeranjang() throws IOException{
-        
+        Detail info = new Detail();
+        System.out.println("""
+        ================================================================
+                                Tipe Kosmetik
+        ================================================================
+         1. Skin Care
+         2. Make Up
+        ================================================================""");
+        System.out.print("Pilihan Anda [1/2] : ");
+        int lihat = Integer.parseInt(baca.readLine());
+        if(lihat == 1){
+            if(data1.isEmpty()){
+                System.out.println("----------------------------------------------------------------");
+                System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Terlebih Dahulu");
+            }else{ //lihat data skincare
+                System.out.println("----------------------------------------------------------------");
+                System.out.println("                        DATA SKIN CARE");
+                System.out.println("----------------------------------------------------------------");
+                System.out.print(" Ingin Melihat Data Secara Lengkap? [y/t] : ");
+                String pilih = baca.readLine();
+                System.out.println("----------------------------------------------------------------");
+                for(int i = 0; i < data1.size(); i++){
+                    if (pilih.equals("Y") || pilih.equals("y")){
+                        System.out.println(" Data Ke-" + (i+1));
+                        data1.get(i).displayInfo();
+                    }else{
+                        System.out.println(" Data Ke-" + (i+1));
+                        data1.get(i).displayInfo(false);
+                    }
+                }
+            }
+        }else if(lihat == 2){
+            if(data2.isEmpty()){
+                System.out.println("----------------------------------------------------------------");
+                System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Terlebih Dahulu");
+            }else{ //lihat data make up
+                System.out.println("----------------------------------------------------------------");
+                System.out.println("                         DATA MAKE UP");
+                System.out.println("----------------------------------------------------------------");
+                System.out.print(" Ingin Melihat Data Secara Lengkap? [y/t] : ");
+                String pilih1 = baca.readLine();
+                System.out.println("----------------------------------------------------------------");
+                for(int i = 0; i < data2.size(); i++){
+                    if (pilih1.equals("Y") || pilih1.equals("y")){
+                        System.out.println(" Data Ke-" + (i+1));
+                        data2.get(i).displayInfo();
+                    }else{
+                        System.out.println(" Data Ke-" + (i+1));
+                        data2.get(i).displayInfo(false);
+                    }
+                }
+            }
+        }else{
+            info.failChoose();
+        }
+        System.out.print("Pilih ID Barang: ");
+        String idBarang = baca.readLine();
+        System.out.print("Masukkan jumlah barang yang ingin dibeli: ");
+        int jumlahBarang = Integer.parseInt(baca.readLine());
+        if (lihat == 1){ //tambah data skincare ke Keranjang
+            for(Skincare dataSkincare : data1){
+                if(dataSkincare.getIdSkincare().equals(idBarang)){
+                    String idSC = dataSkincare.getIdSkincare();
+                    String namaSC = dataSkincare.getNama();
+                    String merkSC = dataSkincare.getMerk();
+                    String tipeSC = dataSkincare.getTipe();
+                    String jenkulSC = dataSkincare.getJenisKulit();
+                    String sertifikasiSC = dataSkincare.getCertifiedBPOM();
+                    int kuantitasSC = jumlahBarang;
+                    int hargaSC = dataSkincare.getHarga() * jumlahBarang;
+                    KeranjangSC newKeranjangSC = new KeranjangSC(idSC, tipeSC, jenkulSC, namaSC, merkSC, hargaSC, kuantitasSC, sertifikasiSC);
+                    keranjangSC.add(newKeranjangSC);
+                    info.notifySuccessCreate();
+                    break;
+                }
+            }
+        }else if (lihat == 2) { //tambah data make up ke keranjang
+            for(Makeup dataMakeup : data2){
+                if(dataMakeup.getIdMakeup().equals(idBarang)){
+                    String idMU = dataMakeup.getIdMakeup();
+                    String namaMU = dataMakeup.getNama();
+                    String merkMU = dataMakeup.getMerk();
+                    String jenisMU = dataMakeup.getJenis();
+                    String shadeMU = dataMakeup.getShade();
+                    String sertifikasiMU = dataMakeup.getCertifiedBPOM();
+                    int kuantitasMU = jumlahBarang;
+                    int hargaMU = dataMakeup.getHarga() * jumlahBarang;
+                    KeranjangMU newKeranjangMU = new KeranjangMU(idMU, jenisMU, shadeMU, namaMU, merkMU, hargaMU, kuantitasMU, sertifikasiMU);
+                    keranjangMU.add(newKeranjangMU);
+                    info.notifySuccessCreate();
+                    break;
+                }
+            }
+        }
     }
     
     static void readDataKeranjang() throws IOException {
@@ -345,11 +437,19 @@ public class Main{
                 System.out.println("----------------------------------------------------------------");
                 System.out.println("                        DATA BARANG");
                 System.out.println("----------------------------------------------------------------");
+                int totalHarga = 0;
                 for(int i = 0; i < keranjangSC.size(); i++){
                     System.out.println(" Data Ke-" + (i+1));
                     keranjangSC.get(i).displayInfo();
+                    totalHarga += keranjangSC.get(i).getHarga();
                 }
                 System.out.println("----------------------------------------------------------------");
+                System.out.println("TOTAL HARGA = Rp." + totalHarga);
+                System.out.print("\nApakah anda ingin membeli kosmetik tersebut [y/t]: ");
+                String konfirmasi = baca.readLine();
+                if (konfirmasi == "y" || konfirmasi == "Y") {
+                    System.out.println("TRANSAKSI BERHASIL");
+                }
             }
         }
         else if (jumlah == 2){
@@ -360,11 +460,19 @@ public class Main{
                 System.out.println("----------------------------------------------------------------");
                 System.out.println("                        DATA BARANG");
                 System.out.println("----------------------------------------------------------------");
+                int totalHarga = 0;
                 for(int i = 0; i < keranjangMU.size(); i++){
                     System.out.println(" Data Ke-" + (i+1));
                     keranjangMU.get(i).displayInfo();
+                    totalHarga += keranjangSC.get(i).getHarga();
                 }
                 System.out.println("----------------------------------------------------------------");
+                System.out.println("TOTAL HARGA = Rp." + totalHarga);
+                System.out.print("\nApakah anda ingin membeli kosmetik tersebut [y/t]: ");
+                String konfirmasi = baca.readLine();
+                if (konfirmasi == "y" || konfirmasi == "Y") {
+                    System.out.println("TRANSAKSI BERHASIL");
+                }
             }
         }else{
             info.failChoose();
@@ -436,7 +544,7 @@ public class Main{
                         System.out.print(" Harga Make Up Terbaru     : "); dataMakeup.getHarga();
                         System.out.print(" Kuantitas Make Up Terbaru : "); dataMakeup.setKuantitas(Integer.parseInt(baca.readLine()));
                         System.out.println("----------------------------------------------------------------");
-                        info.notifySuccessUpdate();    
+                        info.notifySuccessUpdate();
                         break;
                     }else{
                         info.notifyFailUpdate();
@@ -498,12 +606,22 @@ public class Main{
     }
 
     public static void main(String[] args) throws IOException {
+        // TAMBAH DATA AWAL
+        Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
+        data1.add(newDataSC);
+        Skincare newDataSC2 = new Skincare("2", "Azarine Night Cream Moisturizer", "Azarine", 47000, 1200, "Tidak Ada", "Moisturizer", "Sensitif");
+        data1.add(newDataSC2);
+        Makeup newDataMU = new Makeup("1", "Creamatte Lip Cream", "Emina", 47500, 200, "Ada", "Lipstick", "Fuzzy Muzzy");
+        data2.add(newDataMU);
+        Makeup newDataMU2 = new Makeup("2", "IMPLORA Urban Lip Cream Matte", "Implora", 16000, 550, "Tidak Ada", "Lip Cream", "Allure");
+        data2.add(newDataMU2);
+        
         Scanner input = new Scanner(System.in);
         String username, password;
 
         while(true){
             System.out.println("""
-            ****************************************************************
+            \n****************************************************************
                                        Beauty Shop
             ****************************************************************
                                     Welcome Login Page 
@@ -521,7 +639,7 @@ public class Main{
                 int pilihan = 0;
                 do {
                     System.out.println("""
-                    ****************************************************************
+                    \n****************************************************************
                                              Beauty Shop
                     ****************************************************************
                                            Main Menu Admin
@@ -570,14 +688,14 @@ public class Main{
                 int pilihan = 0;
                 do {
                     System.out.println("""
-                    ****************************************************************
+                    \n****************************************************************
                                              Beauty Shop
                     ****************************************************************
                                            Main Menu User
                     ================================================================
-                    1. Lihat Data Kosmetik
-                    2. Keranjang
-                    3. Pemesanan
+                    1. Pesan Data Kosmetik
+                    2. Atur Keranjang
+                    3. Lakukan Pemesanan
                     4. Keluar
                     ================================================================""");
                     System.out.print(" Pilihan Anda [1-4]: ");
@@ -585,8 +703,7 @@ public class Main{
 
                     switch (pilihan) {
                         case 1:
-                            //Lihat Data
-                            readData();
+                            //Tambah Keranjang
                             createDataKeranjang();
                             break;
                         case 2:
@@ -619,6 +736,7 @@ public class Main{
                             } while(pilihan!= 3);
                         case 3:
                             //Pemesanan
+                            readDataKeranjang();
                             break;
                         case 4:
                             //keluar
