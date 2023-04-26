@@ -183,9 +183,9 @@ public class Main{
             for(Skincare dataSkincare : data1){
                 while(true){
                     System.out.println("----------------------------------------------------------------");
-                    System.out.print("Nama Skin Care yang Ingin Diubah : ");
-                    String namaSC = baca.readLine();
-                    if(dataSkincare.getNama().equals(namaSC)){
+                    System.out.print("ID Skin Care yang Ingin Diubah : ");
+                    String idSC = baca.readLine();
+                    if(dataSkincare.getIdSkincare().equals(idSC)){
                         System.out.println("----------------------------------------------------------------");
                         System.out.print(" Nama Skin Care Terbaru       : "); dataSkincare.setNama(baca.readLine());
                         System.out.print(" Merk Skin Care Terbaru       : "); dataSkincare.setMerk(baca.readLine());
@@ -220,9 +220,9 @@ public class Main{
             for(Makeup dataMakeup : data2){
                 while(true){
                     System.out.println("----------------------------------------------------------------");
-                    System.out.print("Nama Make Up yang Ingin Diubah : ");
-                    String namaMU = baca.readLine();
-                    if(dataMakeup.getNama().equals(namaMU)){
+                    System.out.print("ID Make Up yang Ingin Diubah : ");
+                    String idMU = baca.readLine();
+                    if(dataMakeup.getIdMakeup().equals(idMU)){
                         System.out.println("----------------------------------------------------------------");
                         System.out.print(" Nama Make Up Terbaru      : "); dataMakeup.setNama(baca.readLine());;
                         System.out.print(" Merk Make Up Terbaru      : "); dataMakeup.setMerk(baca.readLine()); 
@@ -273,10 +273,10 @@ public class Main{
         int delete = Integer.parseInt(baca.readLine());
         if (delete == 1){
             System.out.println("----------------------------------------------------------------");
-            System.out.print(" Masukkan Nama Skin Care yang Ingin Anda Hapus : ");
-            String nmSC = baca.readLine();
+            System.out.print(" Masukkan ID Skin Care yang Ingin Anda Hapus : ");
+            String idSC = baca.readLine();
             for(int i  = 0; i < data1.size(); i++) {
-                if(data1.get(i).getNama().equals(nmSC)){
+                if(data1.get(i).getIdSkincare().equals(idSC)){
                     info.notifySuccessDelete();
                     data1.remove(i);
                 }else{
@@ -301,10 +301,10 @@ public class Main{
             }
         }else if  (delete == 2){
             System.out.println("----------------------------------------------------------------");
-            System.out.print(" Masukkan Nama Make Up yang Ingin Anda Hapus : "); 
+            System.out.print(" Masukkan ID Make Up yang Ingin Anda Hapus : "); 
             String nmMU = baca.readLine();
             for(int i  = 0; i < data2.size(); i++) {
-                if(data2.get(i).getNama().equals(nmMU)){
+                if(data2.get(i).getIdMakeup().equals(nmMU)){
                     info.notifySuccessDelete();
                     data2.remove(i);
                 }else{
