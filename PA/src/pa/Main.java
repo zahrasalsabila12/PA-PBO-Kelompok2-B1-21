@@ -685,7 +685,7 @@ public class Main{
         public static void loginFormUser() throws IOException{
             Scanner input = new Scanner(System.in);
             String username, password;
-            File path = new File("src/pa/akun.csv");
+            File path = new File("PA/src/pa/akun.csv");
             Scanner myreader = new Scanner(path);
             Boolean _found = false;
             while (myreader.hasNextLine()){
