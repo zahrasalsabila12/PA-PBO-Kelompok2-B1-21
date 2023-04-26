@@ -130,9 +130,11 @@ public class Main{
                     if (pilih.equals("Y") || pilih.equals("y")){
                         System.out.println(" Data Ke-" + (i+1));
                         data1.get(i).displayInfo();
-                    }else{
+                    }else if(pilih.equals("T") || pilih.equals("t")){
                         System.out.println(" Data Ke-" + (i+1));
                         data1.get(i).displayInfo(false);
+                    }else{
+                        info.failChoose();
                     }
                 }
             }
@@ -151,9 +153,11 @@ public class Main{
                     if (pilih1.equals("Y") || pilih1.equals("y")){
                         System.out.println(" Data Ke-" + (i+1));
                         data2.get(i).displayInfo();
-                    }else{
+                    }else if(pilih1.equals("T") || pilih1.equals("t")){
                         System.out.println(" Data Ke-" + (i+1));
                         data2.get(i).displayInfo(false);
+                    }else{
+                        info.failChoose();
                     }
                 }
             }
@@ -813,15 +817,15 @@ public class Main{
     }
 
     public static void main(String[] args) throws IOException {
-        // TAMBAH DATA AWAL
-        Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
-        data1.add(newDataSC);
-        Skincare newDataSC2 = new Skincare("2", "Azarine Night Cream Moisturizer", "Azarine", 47000, 1200, "Tidak Ada", "Moisturizer", "Sensitif");
-        data1.add(newDataSC2);
-        Makeup newDataMU = new Makeup("1", "Creamatte Lip Cream", "Emina", 47500, 200, "Ada", "Lipstick", "Fuzzy Muzzy");
-        data2.add(newDataMU);
-        Makeup newDataMU2 = new Makeup("2", "IMPLORA Urban Lip Cream Matte", "Implora", 16000, 550, "Tidak Ada", "Lip Cream", "Allure");
-        data2.add(newDataMU2);
+        // // TAMBAH DATA AWAL
+        // Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
+        // data1.add(newDataSC);
+        // Skincare newDataSC2 = new Skincare("2", "Azarine Night Cream Moisturizer", "Azarine", 47000, 1200, "Tidak Ada", "Moisturizer", "Sensitif");
+        // data1.add(newDataSC2);
+        // Makeup newDataMU = new Makeup("1", "Creamatte Lip Cream", "Emina", 47500, 200, "Ada", "Lipstick", "Fuzzy Muzzy");
+        // data2.add(newDataMU);
+        // Makeup newDataMU2 = new Makeup("2", "IMPLORA Urban Lip Cream Matte", "Implora", 16000, 550, "Tidak Ada", "Lip Cream", "Allure");
+        // data2.add(newDataMU2);
         
         Scanner input = new Scanner(System.in);
         String username, password;
