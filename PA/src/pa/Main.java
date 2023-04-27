@@ -634,7 +634,7 @@ public class Main{
         do {
             System.out.println("""
             ================================================================
-                                   Pembelian Kosmetik                       
+                                  Pembelian Kosmetik
             ================================================================
              1. Skin Care
              2. Make Up
@@ -672,6 +672,9 @@ public class Main{
                                     }
                                 }
                             }
+                            for(int x  = 0; x < keranjangSC.size(); x++) {
+                                keranjangSC.remove(x);
+                            }
                             System.out.println("\n ***TRANSAKSI BERHASIL*** ");
                         }else if(konfirmasi.equals("t") || konfirmasi.equals("T")){
                             System.out.println("\n ***TRANSAKSI BATAL*** ");
@@ -690,7 +693,7 @@ public class Main{
                         for(int i = 0; i < keranjangMU.size(); i++){
                             System.out.println(" Data Ke-" + (i+1));
                             keranjangMU.get(i).displayInfo();
-                            totalHarga += keranjangSC.get(i).getHarga();
+                            totalHarga += keranjangMU.get(i).getHarga();
                         }
                         System.out.println("================================================================");
                         System.out.println("TOTAL HARGA = Rp." + totalHarga);
@@ -706,6 +709,8 @@ public class Main{
                                         dataMU.setKuantitas(newStok);
                                     }
                                 }
+                            }for(int x  = 0; x < keranjangMU.size(); x++) {
+                                keranjangMU.remove(x);
                             }
                             System.out.println("\n*** TRANSAKSI BERHASIL ***");
                         }else if(konfirmasi.equals("t") || konfirmasi.equals("T")){
@@ -1038,61 +1043,68 @@ public class Main{
                         4. Keluar
                         ================================================================""");
                         System.out.print(" Pilihan Anda [1-4]: ");
-                    try{
-                        pilihan = Integer.parseInt(baca.readLine());
+                        try{
+                            pilihan = Integer.parseInt(baca.readLine());
 
-                        switch (pilihan) {
-                            case 1:
-                                //Tambah Keranjang
-                                createDataKeranjang();
-                                break;
-                            case 2:
-                                //Cek Keranjang
-                                do {
-                                    System.out.println("""
-                                    ****************************************************************
-                                                             Beauty Shop
-                                    ****************************************************************
-                                                              Keranjang
-                                    ================================================================
-                                    1. Ubah Jumlah Barang
-                                    2. Hapus Barang
-                                    3. Keluar
-                                    ================================================================""");
-                                    System.out.print(" Pilihan Anda [1-3]: ");
-                                    try{
-                                        pilihan = Integer.parseInt(baca.readLine());
-                                        switch(pilihan){
-                                            case 1 :
-                                                //ubah jumlah barang
-                                                updateDataKeranjang();
-                                                break;
-                                            case 2 :
-                                                //hapus barang
-                                                deleteDataKeranjang();
-                                                break;
-                                            case 3 :
-                                                break;
+                            switch (pilihan) {
+                                case 1:
+                                    //Tambah Keranjang
+                                    createDataKeranjang();
+                                    break;
+                                case 2:
+                                    //Cek Keranjang
+                                    do {
+                                        System.out.println("""
+                                        ****************************************************************
+                                                                 Beauty Shop
+                                        ****************************************************************
+                                                                  Keranjang
+                                        ================================================================
+                                        1. Ubah Jumlah Barang
+                                        2. Hapus Barang
+                                        3. Keluar
+                                        ================================================================""");
+                                        System.out.print(" Pilihan Anda [1-3]: ");
+                                        try{
+                                            pilihan = Integer.parseInt(baca.readLine());
+                                            switch(pilihan){
+                                                case 1 :
+                                                    //ubah jumlah barang
+                                                    updateDataKeranjang();
+                                                    break;
+                                                case 2 :
+                                                    //hapus barang
+                                                    deleteDataKeranjang();
+                                                    break;
+                                                case 3 :
+                                                    break;
+                                            }
+                                        }catch (NumberFormatException e){
+                                            System.out.println(" Inputan harus di isi dengan angka, mohon coba kembali!");
                                         }
-                                    }catch (NumberFormatException e){
-                                        System.out.println(" Inputan harus di isi dengan angka, mohon coba kembali!");
+                                    } while(pilihan!= 3);
+                                case 3:
+                                    //Pemesanan
+                                    readDataKeranjang();
+                                    break;
+                                case 4:
+                                    //keluar
+                                    for(int x  = 0; x < keranjangSC.size(); x++) {
+                                        keranjangSC.remove(x);
                                     }
-                                } while(pilihan!= 3);
-                            case 3:
-                                //Pemesanan
-                                readDataKeranjang();
-                                break;
-                            case 4:
-                                //keluar
-                                System.out.println("================================================================");
-                                System.out.println("                       Terima Kasih");
-                                System.out.println("================================================================");
-                                break;
-                            default:
-                                System.out.println("================================================================");
-                                System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
-                                break;
-                        }
+                                    for(int x  = 0; x < keranjangMU.size(); x++) {
+                                        keranjangMU.remove(x);
+                                    }
+                                    System.out.println("================================================================");
+                                    System.out.println("                          Terima Kasih");
+                                    System.out.println("================================================================");
+                                    break;
+
+                                default:
+                                    System.out.println("================================================================");
+                                    System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
+                                    break;
+                            }
                         }catch (NumberFormatException e) {
                             System.out.println(" Inputan harus di isi dengan angka, mohon coba kembali!");
                         }
@@ -1103,7 +1115,6 @@ public class Main{
                     System.out.println("   >>> SILAHKAN MASUKAN PASSWORD DAN USERNMAE YANG BENAR <<<    ");
                 }
     }
-    
     
     static void Registrasi()throws IOException{
         Scanner input = new Scanner(System.in);
