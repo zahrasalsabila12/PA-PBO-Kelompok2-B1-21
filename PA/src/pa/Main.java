@@ -817,7 +817,7 @@ public class Main{
             System.out.println("================================================================");
             System.out.print("Masukkan password: ");
             password = input.nextLine();
-            Scanner scanner = new Scanner(Files.newBufferedReader(Paths.get("src/pa/akun.csv")));
+            Scanner scanner = new Scanner(Files.newBufferedReader(Paths.get("PA/src/pa/akun.csv")));
             scanner.useDelimiter(",");
 
             while (scanner.hasNextLine()){
