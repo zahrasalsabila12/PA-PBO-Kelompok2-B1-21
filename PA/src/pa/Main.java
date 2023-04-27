@@ -1083,6 +1083,7 @@ public class Main{
                                             System.out.println(" Inputan harus di isi dengan angka, mohon coba kembali!");
                                         }
                                     } while(pilihan!= 3);
+                                    break;
                                 case 3:
                                     //Pemesanan
                                     readDataKeranjang();
