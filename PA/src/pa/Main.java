@@ -1097,9 +1097,16 @@ public class Main{
     static void Registrasi()throws IOException{
         Scanner input = new Scanner(System.in);
         String username, password;
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("src/pa/akun.csv"));
-        for (int i = 0;i < 10 ;i++){
-            System.out.println("""
+        // Membaca file CSV dan menyimpannya ke dalam StringBuilder
+        Path path = Paths.get("src/pa/akun.csv");
+        StringBuilder builder = new StringBuilder();
+        try {
+            String content = new String(Files.readAllBytes(path));
+            builder.append(content);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+                    System.out.println("""
             \n****************************************************************
                                        Beauty Shop
             ****************************************************************
@@ -1110,18 +1117,19 @@ public class Main{
             System.out.println("================================================================");
             System.out.print("Masukkan password: ");
             password = input.nextLine();
-            writer.append(username);
-            writer.append(",");
-            writer.append(password);
-            writer.append("\n");
-            writer.flush();
-            System.out.println("Apakah ingin mendaftarkan akun lagi? (Y/N)");
-            String choice = input.nextLine();
-            if (choice.equalsIgnoreCase("n")) {
-                break;
+            String newAccount = username + "," + password + "\n";
+             // Memeriksa apakah akun sudah terdaftar
+            boolean isRegistered = builder.indexOf(username) != -1;
+            if (isRegistered) {
+                System.out.println("Username sudah terdaftar");
+            } else {
+                // Menambahkan string data akun baru ke dalam StringBuilder
+                builder.append(newAccount);
+                System.out.println("Registrasi berhasil");
             }
-        }
-        writer.close();
+                FileWriter writer = new FileWriter("src/pa/akun.csv");
+                writer.write(builder.toString());
+                writer.close();
     }
 
     public static void main(String[] args) throws IOException {
