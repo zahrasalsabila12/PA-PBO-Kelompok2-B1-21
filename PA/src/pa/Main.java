@@ -420,6 +420,7 @@ public class Main{
     static void deleteData() throws IOException{
         Detail info = new Detail();
         int delete = 0;
+        int notif = 0;
         do {
             System.out.println("""
             ================================================================
@@ -437,26 +438,26 @@ public class Main{
                     System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Terlebih Dahulu");
                     break;
                 }else{ //lihat data skincare
-                    while(true){
-                        System.out.println("----------------------------------------------------------------");
-                        System.out.println("                        DATA SKIN CARE");
-                        System.out.println("----------------------------------------------------------------");
-                        for(int i = 0; i < data1.size(); i++){
-                                System.out.println(" Data Ke-" + (i+1));
-                                data1.get(i).displayInfo();
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("                        DATA SKIN CARE");
+                    System.out.println("----------------------------------------------------------------");
+                    for(int i = 0; i < data1.size(); i++){
+                            System.out.println(" Data Ke-" + (i+1));
+                            data1.get(i).displayInfo();
+                    }
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.print(" Masukkan ID Skin Care yang Ingin Anda Hapus : ");
+                    String idSC = baca.readLine();
+                    notif = 0;
+                    for(int i  = 0; i < data1.size(); i++) {
+                        if(data1.get(i).getIdSkincare().equals(idSC)){
+                            info.notifySuccessDelete();
+                            data1.remove(i);
+                            notif = 1;
+                            break;
                         }
-                        System.out.println("----------------------------------------------------------------");
-                        System.out.print(" Masukkan ID Skin Care yang Ingin Anda Hapus : ");
-                        String idSC = baca.readLine();
-                        for(int i  = 0; i < data1.size(); i++) {
-                            if(data1.get(i).getIdSkincare().equals(idSC)){
-                                info.notifySuccessDelete();
-                                data1.remove(i);
-                                break;
-                            }else{
-                                info.notifyFailDelete();
-                            }
-                        }
+                    }if (notif == 0){
+                        info.notifyFailDelete();
                     }
                 }
             }else if  (delete == 2){
@@ -465,28 +466,28 @@ public class Main{
                     System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Terlebih Dahulu");
                     break;
                 }else{ //lihat data make up
-                    while(true){
-                        System.out.println("----------------------------------------------------------------");
-                        System.out.println("                         DATA MAKE UP");
-                        System.out.println("----------------------------------------------------------------");
-                        for(int i = 0; i < data2.size(); i++){
-                            System.out.println(" Data Ke-" + (i+1));
-                            data2.get(i).displayInfo();
-                        }
-                        System.out.println("----------------------------------------------------------------");
-                        System.out.print(" Masukkan ID Make Up yang Ingin Anda Hapus : "); 
-                        String nmMU = baca.readLine();
-                        for(int i  = 0; i < data2.size(); i++) {
-                            if(data2.get(i).getIdMakeup().equals(nmMU)){
-                                info.notifySuccessDelete();
-                                data2.remove(i);
-                                break;
-                            }else{
-                                info.notifyFailDelete();
-                            }
-                        }
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("                         DATA MAKE UP");
+                    System.out.println("----------------------------------------------------------------");
+                    for(int i = 0; i < data2.size(); i++){
+                        System.out.println(" Data Ke-" + (i+1));
+                        data2.get(i).displayInfo();
                     }
-            }
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.print(" Masukkan ID Make Up yang Ingin Anda Hapus : "); 
+                    String idMU = baca.readLine();
+                    notif = 0;
+                    for(int i  = 0; i < data2.size(); i++) {
+                        if(data2.get(i).getIdMakeup().equals(idMU)){
+                            info.notifySuccessDelete();
+                            data2.remove(i);
+                            notif = 1;
+                            break;
+                        }
+                    }if (notif == 0){
+                        info.notifyFailDelete();
+                    }
+                }
             }else if (delete == 3){
                 break;
             }else{
@@ -504,7 +505,7 @@ public class Main{
             
             System.out.println("""
             ================================================================
-                                   Keranjang Pembelian
+                                  Keranjang Pembelian
             ================================================================
              1. Tambah Skin Care
              2. Tambah Make Up
@@ -537,6 +538,8 @@ public class Main{
                                             break;
                                         } else if (jumlahBarangSC < 0) {
                                             System.out.println(" Jumlah barang harus bernilai positif, mohon coba kembali!");
+                                        } else if (jumlahBarangSC == 0) {
+                                            System.out.println(" Jumlah barang tidak boleh 0, mohon coba kembali!");
                                         }
                                     }catch (NumberFormatException e) {
                                         System.out.println(" Jumlah barang tidak valid, mohon coba kembali!");
@@ -586,6 +589,8 @@ public class Main{
                                             break;
                                         } else if (jumlahBarangMU < 0) {
                                             System.out.println(" Jumlah barang harus bernilai positif, mohon coba kembali!");
+                                        } else if (jumlahBarangMU == 0) {
+                                            System.out.println(" Jumlah barang tidak boleh 0, mohon coba kembali!");
                                         }
                                     }catch (NumberFormatException e) {
                                         System.out.println(" Jumlah barang tidak valid, mohon coba kembali!");
@@ -627,7 +632,7 @@ public class Main{
         do {
             System.out.println("""
             ================================================================
-                                   Pembelian Kosmetik
+                                   Pembelian Kosmetik                       
             ================================================================
              1. Skin Care
              2. Make Up
@@ -720,10 +725,11 @@ public class Main{
     static void  updateDataKeranjang() throws IOException {
         Detail info = new Detail();
         int update = 0;
+        int notif = 0;
         do {
             System.out.println("""
             ================================================================
-                               Update Data Jumlah Pembelian 
+                              Update Data Jumlah Pembelian
             ================================================================
              1. Skin Care
              2. Make Up
@@ -737,39 +743,41 @@ public class Main{
                         System.out.println("----------------------------------------------------------------");
                         System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Keranjang Terlebih Dahulu");
                     }else{
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("                        DATA BARANG");
+                        System.out.println("----------------------------------------------------------------");
+                        for(int i = 0; i < keranjangSC.size(); i++){
+                            System.out.println(" Data Ke-" + (i+1));
+                            keranjangSC.get(i).displayInfo();
+                        }
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.print("ID keranjang Skin Care yang Ingin Diubah : ");
+                        String idSC = baca.readLine();
+                        notif = 0;
                         for(KeranjangSC dataSkincare : keranjangSC){
-                            while(true){
+                            if(dataSkincare.getIdSkincare().equals(idSC)){
                                 System.out.println("----------------------------------------------------------------");
-                                System.out.println("                        DATA BARANG");
-                                System.out.println("----------------------------------------------------------------");
-                                for(int i = 0; i < keranjangSC.size(); i++){
-                                    System.out.println(" Data Ke-" + (i+1));
-                                    keranjangSC.get(i).displayInfo();
-                                }
-                                System.out.println("----------------------------------------------------------------");
-                                System.out.print("ID keranjang Skin Care yang Ingin Diubah : ");
-                                String idSC = baca.readLine();
-                                if(dataSkincare.getIdSkincare().equals(idSC)){
-                                    System.out.println("----------------------------------------------------------------");
-                                    while (true) {
-                                        try {
-                                            System.out.print(" Kuantitas Pembelian Skin Care Terbaru : "); dataSkincare.setKuantitas(Integer.parseInt(baca.readLine()));
-                                            if (dataSkincare.getKuantitas() > 0){
-                                                break;
-                                            } else if (dataSkincare.getKuantitas() < 0) {
-                                                System.out.println(" Kuantitas barang harus bernilai positif, mohon coba kembali!");
-                                            }
-                                        }catch (NumberFormatException e) {
-                                            System.out.println(" Kuantitas barang tidak valid, mohon coba kembali!");
+                                while (true) {
+                                    try {
+                                        System.out.print(" Kuantitas Pembelian Skin Care Terbaru : "); dataSkincare.setKuantitas(Integer.parseInt(baca.readLine()));
+                                        if (dataSkincare.getKuantitas() > 0){
+                                            break;
+                                        } else if (dataSkincare.getKuantitas() < 0) {
+                                            System.out.println(" Kuantitas barang harus bernilai positif, mohon coba kembali!");
+                                        } else if (dataSkincare.getKuantitas() == 0) {
+                                            System.out.println(" Kuantitas barang tidak boleh 0, mohon coba kembali!");
                                         }
+                                    }catch (NumberFormatException e) {
+                                        System.out.println(" Kuantitas barang tidak valid, mohon coba kembali!");
                                     }
-                                    System.out.println("----------------------------------------------------------------");
-                                    info.notifySuccessUpdate();
-                                    break;
-                                }else{
-                                    info.notifyFailUpdate();
                                 }
+                                System.out.println("----------------------------------------------------------------");
+                                info.notifySuccessUpdate();
+                                notif = 1;
+                                break;
                             }
+                        }if (notif == 0){
+                            info.notifyFailUpdate();
                         }
                     }
                 }else if (update == 2) {
@@ -777,39 +785,41 @@ public class Main{
                         System.out.println("----------------------------------------------------------------");
                         System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Keranjang Terlebih Dahulu");
                     }else{
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("                        DATA BARANG");
+                        System.out.println("----------------------------------------------------------------");
+                        for(int i = 0; i < keranjangMU.size(); i++){
+                            System.out.println(" Data Ke-" + (i+1));
+                            keranjangMU.get(i).displayInfo();
+                        }
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.print("ID keranjang Make Up yang Ingin Diubah : ");
+                        String idMU = baca.readLine();
+                        notif = 0;
                         for(KeranjangMU dataMakeup : keranjangMU){
-                            while(true){
+                            if(dataMakeup.getIdMakeup().equals(idMU)){
                                 System.out.println("----------------------------------------------------------------");
-                                System.out.println("                        DATA BARANG");
-                                System.out.println("----------------------------------------------------------------");
-                                for(int i = 0; i < keranjangMU.size(); i++){
-                                    System.out.println(" Data Ke-" + (i+1));
-                                    keranjangMU.get(i).displayInfo();
-                                }
-                                System.out.println("----------------------------------------------------------------");
-                                System.out.print("ID keranjang Make Up yang Ingin Diubah : ");
-                                String idMU = baca.readLine();
-                                if(dataMakeup.getIdMakeup().equals(idMU)){
-                                    System.out.println("----------------------------------------------------------------");
-                                    while (true) {
-                                        try {
-                                            System.out.print(" Kuantitas Pembelian Make Up Terbaru : "); dataMakeup.setKuantitas(Integer.parseInt(baca.readLine()));
-                                            if (dataMakeup.getKuantitas() > 0){
-                                                break;
-                                            } else if (dataMakeup.getKuantitas() < 0) {
-                                                System.out.println(" Kuantitas barang harus bernilai positif, mohon coba kembali!");
-                                            }
-                                        }catch (NumberFormatException e) {
-                                            System.out.println(" Kuantitas barang tidak valid, mohon coba kembali!");
+                                while (true) {
+                                    try {
+                                        System.out.print(" Kuantitas Pembelian Make Up Terbaru : "); dataMakeup.setKuantitas(Integer.parseInt(baca.readLine()));
+                                        if (dataMakeup.getKuantitas() > 0){
+                                            break;
+                                        } else if (dataMakeup.getKuantitas() < 0) {
+                                            System.out.println(" Kuantitas barang harus bernilai positif, mohon coba kembali!");
+                                        } else if (dataMakeup.getKuantitas() == 0) {
+                                            System.out.println(" Kuantitas barang tidak boleh 0, mohon coba kembali!");
                                         }
+                                    }catch (NumberFormatException e) {
+                                        System.out.println(" Kuantitas barang tidak valid, mohon coba kembali!");
                                     }
-                                    System.out.println("----------------------------------------------------------------");
-                                    info.notifySuccessUpdate();
-                                    break;
-                                }else{
-                                    info.notifyFailUpdate();
                                 }
+                                System.out.println("----------------------------------------------------------------");
+                                info.notifySuccessUpdate();
+                                notif = 1;
+                                break;
                             }
+                        }if (notif == 0){
+                            info.notifyFailUpdate();
                         }
                     }
                 }else if (update == 3){
@@ -827,6 +837,7 @@ public class Main{
     static void deleteDataKeranjang() throws IOException{
         Detail info = new Detail();
         int delete = 0;
+        int notif = 0;
         do {
             System.out.println("""
             ================================================================
@@ -844,55 +855,53 @@ public class Main{
                         System.out.println("----------------------------------------------------------------");
                         System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Keranjang Terlebih Dahulu");
                     }else{
-                        while (true) {
-                            System.out.println("----------------------------------------------------------------");
-                            System.out.println("                        DATA BARANG");
-                            System.out.println("----------------------------------------------------------------");
-                            for(int i  = 0; i < keranjangSC.size(); i++) {
-                                System.out.println(" Data Ke-" + (i+1));
-                                keranjangSC.get(i).displayInfo();
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("                        DATA BARANG");
+                        System.out.println("----------------------------------------------------------------");
+                        for(int i  = 0; i < keranjangSC.size(); i++){
+                            System.out.println(" Data Ke-" + (i+1));
+                            keranjangSC.get(i).displayInfo();
+                        }
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.print(" Masukkan ID Keranjang Skin Care yang Ingin Anda Hapus : ");
+                        String idSC = baca.readLine();
+                        notif = 0;
+                        for(int x  = 0; x < keranjangSC.size(); x++) {
+                            if(keranjangSC.get(x).getIdSkincare().equals(idSC)){
+                                info.notifySuccessDelete();
+                                keranjangSC.remove(x);
+                                notif = 1;
+                                break;
                             }
-                            System.out.println("----------------------------------------------------------------");
-                            System.out.print(" Masukkan ID Skin Care yang Ingin Anda Hapus : ");
-                            String idSC = baca.readLine();
-                            for(int x  = 0; x < keranjangSC.size(); x++) {
-                                if(keranjangSC.get(x).getIdSkincare().equals(idSC)){
-                                    info.notifySuccessDelete();
-                                    keranjangSC.remove(x);
-                                    break;
-                                }else{
-                                    info.notifyFailDelete();
-                                }
-                            }
-                            break;
+                        }if(notif == 0){
+                            info.notifyFailDelete();
                         }
                     }
-                }else if  (delete == 2){
+                }else if (delete == 2){
                     if(keranjangMU.isEmpty()){
                         System.out.println("----------------------------------------------------------------");
                         System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Keranjang Terlebih Dahulu");
                     }else{
-                        while (true) {
-                            System.out.println("----------------------------------------------------------------");
-                            System.out.println("                        DATA BARANG");
-                            System.out.println("----------------------------------------------------------------");
-                            for(int i  = 0; i < keranjangMU.size(); i++) {
-                                System.out.println(" Data Ke-" + (i+1));
-                                keranjangMU.get(i).displayInfo();
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("                        DATA BARANG");
+                        System.out.println("----------------------------------------------------------------");
+                        for(int i  = 0; i < keranjangMU.size(); i++) {
+                            System.out.println(" Data Ke-" + (i+1));
+                            keranjangMU.get(i).displayInfo();
+                        }
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.print(" Masukkan ID Make Up yang Ingin Anda Hapus : "); 
+                        String idMU = baca.readLine();
+                        notif = 0;
+                        for(int x  = 0; x < keranjangMU.size(); x++) {
+                            if(keranjangMU.get(x).getIdMakeup().equals(idMU)){
+                                info.notifySuccessDelete();
+                                keranjangMU.remove(x);
+                                notif = 1;
+                                break;
                             }
-                                System.out.println("----------------------------------------------------------------");
-                                System.out.print(" Masukkan ID Make Up yang Ingin Anda Hapus : "); 
-                                String idMU = baca.readLine();
-                                for(int x  = 0; x < keranjangMU.size(); x++) {
-                                    if(keranjangMU.get(x).getIdMakeup().equals(idMU)){
-                                        info.notifySuccessDelete();
-                                        keranjangMU.remove(x);
-                                        break;
-                                }else{
-                                    info.notifyFailDelete();
-                                }
-                            }
-                            break;
+                        }if(notif == 0){
+                            info.notifyFailDelete();
                         }
                     }
                 }else if (delete == 3){
@@ -977,7 +986,7 @@ public class Main{
         } else {
                 System.out.println("================================================================");
                 System.out.println("                USERNAME ATAU PASSWORD SALAH!                   ");
-                System.out.println("    >>> SILAHKAN MASUKAN PASSWORD DAN USERNAME YANG BENAR <<< ");
+                System.out.println("   >>> SILAHKAN MASUKAN PASSWORD DAN USERNAME YANG BENAR <<<    ");
         }
     }
 
@@ -987,9 +996,9 @@ public class Main{
             Boolean _found = false;
             System.out.println("""
             \n****************************************************************
-                                       Beauty Shop
+                                     Beauty Shop
             ****************************************************************
-                                    Welcome Login Page 
+                                  Welcome Login Page 
             ================================================================""");
             System.out.print("Masukkan username: ");
             username = input.nextLine();
@@ -1089,7 +1098,7 @@ public class Main{
                 }else {
                     System.out.println("================================================================");
                     System.out.println("                USERNAME ATAU PASSWORD SALAH!                   ");
-                    System.out.println("      >>> SILAHKAN MASUKAN PASSWORD DAN USERNMAE YANG BENAR <<< ");
+                    System.out.println("   >>> SILAHKAN MASUKAN PASSWORD DAN USERNMAE YANG BENAR <<<    ");
                 }
     }
     
@@ -1106,7 +1115,7 @@ public class Main{
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
-                    System.out.println("""
+        System.out.println("""
             \n****************************************************************
                                        Beauty Shop
             ****************************************************************
