@@ -68,6 +68,8 @@ public class Main{
                             break;
                         } else if (hargaSC < 0) {
                             System.out.println(" Harga Skin Care harus bernilai positif, mohon coba kembali!");
+                        } else if (hargaSC == 0) {
+                            System.out.println(" Harga Skin Care tidak boleh 0, mohon coba kembali!");
                         }
                     }catch (NumberFormatException e) {
                         System.out.println(" Harga Skin Care tidak valid, mohon coba kembali!");
@@ -80,6 +82,8 @@ public class Main{
                             break;
                         } else if (kuantitasSC < 0) {
                             System.out.println(" Kuantitas Skin Care harus bernilai positif, mohon coba kembali!");
+                        } else if (kuantitasSC == 0) {
+                            System.out.println(" Kuantitas Skin Care tidak boleh 0, mohon coba kembali!");
                         }
                     }catch (NumberFormatException e) {
                         System.out.println(" Kuantitas Skin Care tidak valid, mohon coba kembali!");
@@ -137,6 +141,8 @@ public class Main{
                             break;
                         } else if (hargaMU < 0) {
                             System.out.println(" Harga Make Up harus bernilai positif, mohon coba kembali!");
+                        } else if (hargaMU == 0) {
+                            System.out.println(" Harga Make Up tidak boleh 0, mohon coba kembali!");
                         }
                     }catch (NumberFormatException e) {
                         System.out.println(" Harga Make Up tidak valid, mohon coba kembali!");
@@ -149,6 +155,8 @@ public class Main{
                             break;
                         } else if (kuantitasMU < 0) {
                             System.out.println(" Kuantitas Make Up harus bernilai positif, mohon coba kembali!");
+                        } else if (kuantitasMU == 0) {
+                            System.out.println(" Kuantitas Make Up tidak boleh 0, mohon coba kembali!");
                         }
                     }catch (NumberFormatException e) {
                         System.out.println(" Kuantitas Make Up tidak valid, mohon coba kembali!");
@@ -263,6 +271,7 @@ public class Main{
     //mengubah data
     static void  updateData() throws IOException {
         Detail info = new Detail();
+        int notif = 0;
         int update = 0;
         do {
             System.out.println("""
@@ -282,55 +291,60 @@ public class Main{
                     System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Terlebih Dahulu");
                     break;
                 }else{ //lihat data skincare
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("                        DATA SKIN CARE");
+                    System.out.println("----------------------------------------------------------------");
+                    for(int i = 0; i < data1.size(); i++){
+                            System.out.println(" Data Ke-" + (i+1));
+                            data1.get(i).displayInfo();
+                    }
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.print("ID Skin Care yang Ingin Diubah : ");
+                    String idSC = baca.readLine();
+                    notif = 0;
                     for(Skincare dataSkincare : data1){
-                        while(true){
+                        if(dataSkincare.getIdSkincare().equals(idSC)){
                             System.out.println("----------------------------------------------------------------");
-                            System.out.println("                        DATA SKIN CARE");
-                            System.out.println("----------------------------------------------------------------");
-                            for(int i = 0; i < data1.size(); i++){
-                                System.out.println(" Data Ke-" + (i+1));
-                                data1.get(i).displayInfo();
+                            System.out.print(" Nama Skin Care Terbaru       : "); dataSkincare.setNama(baca.readLine());
+                            System.out.print(" Merk Skin Care Terbaru       : "); dataSkincare.setMerk(baca.readLine());
+                            System.out.print(" Tipe Skin Care Terbaru       : "); dataSkincare.setTipe(baca.readLine());
+                            System.out.print(" Untuk Jenis Kulit Terbaru    : "); dataSkincare.setJenisKulit(baca.readLine());
+                            while (true) {
+                                try {
+                                    System.out.print(" Harga Skin Care Terbaru      : "); dataSkincare.setHarga(Integer.parseInt(baca.readLine()));
+                                    if (dataSkincare.getHarga() > 0){
+                                        break;
+                                    } else if (dataSkincare.getHarga() < 0) {
+                                        System.out.println(" Harga Skin Care harus bernilai positif, mohon coba kembali!");
+                                    } else if (dataSkincare.getHarga() == 0) {
+                                        System.out.println(" Harga Skin Care tidak boleh 0, mohon coba kembali!");
+                                    }
+                                }catch (NumberFormatException e) {
+                                    System.out.println(" Harga Skin Care tidak valid, mohon coba kembali!");
+                                }
+                            }
+                            while (true) {
+                                try {
+                                    System.out.print(" Kuantitas Skin Care  Terbaru : "); dataSkincare.setKuantitas(Integer.parseInt(baca.readLine()));
+                                    if (dataSkincare.getKuantitas() > 0){
+                                        break;
+                                    } else if (dataSkincare.getKuantitas() < 0) {
+                                        System.out.println(" Kuantitas Skin Care harus bernilai positif, mohon coba kembali!");
+                                    } else if (dataSkincare.getKuantitas() == 0) {
+                                        System.out.println(" Kuantitas Skin Care tidak boleh 0, mohon coba kembali!");
+                                    }
+                                }catch (NumberFormatException e) {
+                                    System.out.println(" Kuantitas Skin Care tidak valid, mohon coba kembali!");
+                                }
                             }
                             System.out.println("----------------------------------------------------------------");
-                            System.out.print("ID Skin Care yang Ingin Diubah : ");
-                            String idSC = baca.readLine();
-                            if(dataSkincare.getIdSkincare().equals(idSC)){
-                                System.out.println("----------------------------------------------------------------");
-                                System.out.print(" Nama Skin Care Terbaru       : "); dataSkincare.setNama(baca.readLine());
-                                System.out.print(" Merk Skin Care Terbaru       : "); dataSkincare.setMerk(baca.readLine());
-                                System.out.print(" Tipe Skin Care Terbaru       : "); dataSkincare.setTipe(baca.readLine());
-                                System.out.print(" Untuk Jenis Kulit Terbaru    : "); dataSkincare.setJenisKulit(baca.readLine());
-                                while (true) {
-                                    try {
-                                        System.out.print(" Harga Skin Care Terbaru      : "); dataSkincare.setHarga(Integer.parseInt(baca.readLine()));
-                                        if (dataSkincare.getHarga() > 0){
-                                            break;
-                                        } else if (dataSkincare.getHarga() < 0) {
-                                            System.out.println(" Harga Skin Care harus bernilai positif, mohon coba kembali!");
-                                        }
-                                    }catch (NumberFormatException e) {
-                                        System.out.println(" Harga Skin Care tidak valid, mohon coba kembali!");
-                                    }
-                                }
-                                while (true) {
-                                    try {
-                                        System.out.print(" Kuantitas Skin Care  Terbaru : "); dataSkincare.setKuantitas(Integer.parseInt(baca.readLine()));
-                                        if (dataSkincare.getKuantitas() > 0){
-                                            break;
-                                        } else if (dataSkincare.getKuantitas() < 0) {
-                                            System.out.println(" Kuantitas Skin Care harus bernilai positif, mohon coba kembali!");
-                                        }
-                                    }catch (NumberFormatException e) {
-                                        System.out.println(" Kuantitas Skin Care tidak valid, mohon coba kembali!");
-                                    }
-                                }
-                                System.out.println("----------------------------------------------------------------");
-                                info.notifySuccessUpdate();
-                                break;
-                            }else{
-                                info.notifyFailUpdate();
-                            }
+                            info.notifySuccessUpdate();
+                            notif = 1;
+                            break;
                         }
+                    }
+                    if (notif == 0){
+                        info.notifyFailUpdate();
                     }
                 }
             }else if (update == 2) {
@@ -339,56 +353,59 @@ public class Main{
                     System.out.println(" Tidak Ada Data. Mohon Tambahkan Data Terlebih Dahulu");
                     break;
                 }else{ //lihat data make up
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("                         DATA MAKE UP");
+                    System.out.println("----------------------------------------------------------------");
+                    for(int i = 0; i < data2.size(); i++){
+                        System.out.println(" Data Ke-" + (i+1));
+                        data2.get(i).displayInfo();
+                    }
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.print("ID Make Up yang Ingin Diubah : ");
+                    String idMU = baca.readLine();
+                    notif = 0;
                     for(Makeup dataMakeup : data2){
-                        while(true){
+                        if(dataMakeup.getIdMakeup().equals(idMU)){
                             System.out.println("----------------------------------------------------------------");
-                            System.out.println("                         DATA MAKE UP");
-                            System.out.println("----------------------------------------------------------------");
-                            for(int i = 0; i < data2.size(); i++){
-                                System.out.println(" Data Ke-" + (i+1));
-                                data2.get(i).displayInfo();
+                            System.out.print(" Nama Make Up Terbaru      : "); dataMakeup.setNama(baca.readLine());;
+                            System.out.print(" Merk Make Up Terbaru      : "); dataMakeup.setMerk(baca.readLine()); 
+                            System.out.print(" Jenis Make Up Terbaru     : "); dataMakeup.setJenis(baca.readLine());
+                            System.out.print(" Shade Make Up Terbaru     : "); dataMakeup.setShade(baca.readLine());
+                            while (true) {
+                                try {
+                                    System.out.print(" Harga Make Up Terbaru     : "); dataMakeup.setHarga(Integer.parseInt(baca.readLine()));
+                                    if (dataMakeup.getHarga() > 0){
+                                        break;
+                                    } else if (dataMakeup.getHarga() < 0) {
+                                        System.out.println(" Harga Make Up harus bernilai positif, mohon coba kembali!");
+                                    } else if (dataMakeup.getHarga() == 0) {
+                                    System.out.println(" Harga Make Up tidak boleh 0, mohon coba kembali!");
+                                    }
+                                }catch (NumberFormatException e) {
+                                    System.out.println(" Harga Skin Care tidak valid, mohon coba kembali!");
+                                }
+                            }
+                            while (true) {
+                                try {
+                                    System.out.print(" Kuantitas Make Up Terbaru : "); dataMakeup.setKuantitas(Integer.parseInt(baca.readLine()));
+                                    if (dataMakeup.getKuantitas() > 0){
+                                        break;
+                                    } else if (dataMakeup.getKuantitas() < 0) {
+                                        System.out.println(" Kuantitas Make Up harus bernilai positif, mohon coba kembali!");
+                                    } else if (dataMakeup.getKuantitas() == 0) {
+                                    System.out.println(" Kuantitas Make Up tidak boleh 0, mohon coba kembali!");
+                                    }
+                                }catch (NumberFormatException e) {
+                                    System.out.println(" Kuantitas Make Up tidak valid, mohon coba kembali!");
+                                }
                             }
                             System.out.println("----------------------------------------------------------------");
-                            System.out.print("ID Make Up yang Ingin Diubah : ");
-                            String idMU = baca.readLine();
-                            if(dataMakeup.getIdMakeup().equals(idMU)){
-                                System.out.println("----------------------------------------------------------------");
-                                System.out.print(" Nama Make Up Terbaru      : "); dataMakeup.setNama(baca.readLine());;
-                                System.out.print(" Merk Make Up Terbaru      : "); dataMakeup.setMerk(baca.readLine()); 
-                                System.out.print(" Jenis Make Up Terbaru     : "); dataMakeup.setJenis(baca.readLine());
-                                System.out.print(" Shade Make Up Terbaru     : "); dataMakeup.setShade(baca.readLine());
-                                while (true) {
-                                    try {
-                                        System.out.print(" Harga Make Up Terbaru     : "); dataMakeup.setHarga(Integer.parseInt(baca.readLine()));
-                                        if (dataMakeup.getHarga() > 0){
-                                            break;
-                                        } else if (dataMakeup.getHarga() < 0) {
-                                            System.out.println(" Harga Make Up harus bernilai positif, mohon coba kembali!");
-                                        }
-                                    }catch (NumberFormatException e) {
-                                        System.out.println(" Harga Skin Care tidak valid, mohon coba kembali!");
-                                    }
-                                }
-                                while (true) {
-                                    try {
-                                        System.out.print(" Kuantitas Make Up Terbaru : "); dataMakeup.setKuantitas(Integer.parseInt(baca.readLine()));
-                                        if (dataMakeup.getKuantitas() > 0){
-                                            break;
-                                        } else if (dataMakeup.getKuantitas() < 0) {
-                                            System.out.println(" Kuantitas Make Up harus bernilai positif, mohon coba kembali!");
-                                        }
-                                    }catch (NumberFormatException e) {
-                                        System.out.println(" Kuantitas Make Up tidak valid, mohon coba kembali!");
-                                    }
-                                }
-                                
-                                System.out.println("----------------------------------------------------------------");
-                                info.notifySuccessUpdate();    
-                                break;
-                            }else{
-                                info.notifyFailUpdate();
-                            }
+                            info.notifySuccessUpdate();  
+                            notif = 1;
+                            break;
                         }
+                    }if (notif == 0){
+                        info.notifyFailUpdate();
                     }
                 }
             }else if(update == 3){
@@ -469,7 +486,7 @@ public class Main{
                             }
                         }
                     }
-                }
+            }
             }else if (delete == 3){
                 break;
             }else{
@@ -979,7 +996,7 @@ public class Main{
             System.out.println("================================================================");
             System.out.print("Masukkan password: ");
             password = input.nextLine();
-            Scanner scanner = new Scanner(Files.newBufferedReader(Paths.get("PA/src/pa/akun.csv")));
+            Scanner scanner = new Scanner(Files.newBufferedReader(Paths.get("src/pa/akun.csv")));
             scanner.useDelimiter(",");
 
             while (scanner.hasNextLine()){
@@ -1080,7 +1097,7 @@ public class Main{
     static void Registrasi()throws IOException{
         Scanner input = new Scanner(System.in);
         String username, password;
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("PA/src/pa/akun.csv"));
+        BufferedWriter writer = Files.newBufferedWriter(Paths.get("src/pa/akun.csv"));
         for (int i = 0;i < 10 ;i++){
             System.out.println("""
             \n****************************************************************
@@ -1108,15 +1125,15 @@ public class Main{
     }
 
     public static void main(String[] args) throws IOException {
-        // TAMBAH DATA AWAL
-        // Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
-        // data1.add(newDataSC);
-        // Skincare newDataSC2 = new Skincare("2", "Azarine Night Cream Moisturizer", "Azarine", 47000, 1200, "Tidak Ada", "Moisturizer", "Sensitif");
-        // data1.add(newDataSC2);
-        // Makeup newDataMU = new Makeup("1", "Creamatte Lip Cream", "Emina", 47500, 200, "Ada", "Lipstick", "Fuzzy Muzzy");
-        // data2.add(newDataMU);
-        // Makeup newDataMU2 = new Makeup("2", "IMPLORA Urban Lip Cream Matte", "Implora", 16000, 550, "Tidak Ada", "Lip Cream", "Allure");
-        // data2.add(newDataMU2);
+         
+         Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
+         data1.add(newDataSC);
+         Skincare newDataSC2 = new Skincare("2", "Azarine Night Cream Moisturizer", "Azarine", 47000, 1200, "Tidak Ada", "Moisturizer", "Sensitif");
+         data1.add(newDataSC2);
+         Makeup newDataMU = new Makeup("1", "Creamatte Lip Cream", "Emina", 47500, 200, "Ada", "Lipstick", "Fuzzy Muzzy");
+         data2.add(newDataMU);
+         Makeup newDataMU2 = new Makeup("2", "IMPLORA Urban Lip Cream Matte", "Implora", 16000, 550, "Tidak Ada", "Lip Cream", "Allure");
+         data2.add(newDataMU2);
         
         Scanner input = new Scanner(System.in);
         String username, password;
