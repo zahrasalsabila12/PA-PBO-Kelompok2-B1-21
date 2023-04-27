@@ -848,6 +848,7 @@ public class Main{
                         4. Keluar
                         ================================================================""");
                         System.out.print(" Pilihan Anda [1-4]: ");
+                    try{
                         pilihan = Integer.parseInt(baca.readLine());
 
                         switch (pilihan) {
@@ -897,6 +898,9 @@ public class Main{
                                 System.out.println("================================================================");
                                 System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
                                 break;
+                        }
+                        }catch (NumberFormatException e) {
+                            System.out.println(" Inputan harus di isi dengan angka, mohon coba kembali!");
                         }
                     } while (pilihan != 4);
                 }else {
