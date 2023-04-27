@@ -25,153 +25,164 @@ public class Main{
         String idSC = null, idMU = null;
         int hargaSC = 0, kuantitasSC = 0, hargaMU = 0, kuantitasMU = 0;
         Detail info = new Detail();
-        System.out.println("""
-        ================================================================
-                                 Tambah Data
-        ================================================================
-         1. Skin Care
-         2. Make Up
-        ================================================================""");
-        System.out.print("Pilihan Anda [1/2] : ");
-        String tambah = baca.readLine();
-        
-        if ("1".equals(tambah)){ //tambah data skincare
-            System.out.println("----------------------------------------------------------------");
-            System.out.println("| DATA SKIN CARE                                               |");
-            System.out.println("----------------------------------------------------------------");
-            while (true) {
-                int cek = 0;
-                System.out.print(" ID                : "); idSC = baca.readLine();
-                for(Skincare dataSkincare : data1){
-                    if (dataSkincare.getIdSkincare().equals(idSC)) {
-                        System.out.println("ID Skin care sudah ada, mohon coba kembali!");
-                        cek = 1;
+        int tambah = 0;
+        do {
+            System.out.println("""
+            ================================================================
+                                     Tambah Data
+            ================================================================
+             1. Skin Care
+             2. Make Up
+             3. Kembali
+            ================================================================""");
+            System.out.print("Pilihan Anda [1/2] : ");
+            tambah = Integer.parseInt(baca.readLine());
+            
+            if (tambah == 1){ //tambah data skincare
+                System.out.println("----------------------------------------------------------------");
+                System.out.println("| DATA SKIN CARE                                               |");
+                System.out.println("----------------------------------------------------------------");
+                while (true) {
+                    int cek = 0;
+                    System.out.print(" ID                : "); idSC = baca.readLine();
+                    for(Skincare dataSkincare : data1){
+                        if (dataSkincare.getIdSkincare().equals(idSC)) {
+                            System.out.println("ID Skin care sudah ada, mohon coba kembali!");
+                            cek = 1;
+                            break;
+                        }
+                    }
+                    if (cek == 0) {
                         break;
                     }
                 }
-                if (cek == 0) {
+                System.out.print(" Nama              : "); String namaSC = baca.readLine();
+                System.out.print(" Merk              : "); String merkSC = baca.readLine();
+                System.out.print(" Tipe              : "); String tipeSC = baca.readLine();
+                System.out.print(" Untuk Jenis Kulit : "); String jenkulSC = baca.readLine();
+                while (true) {
+                    try {
+                        System.out.print(" Harga             : "); hargaSC = Integer.parseInt(baca.readLine());
+                        if (hargaSC > 0){
+                            break;
+                        } else if (hargaSC < 0) {
+                            System.out.println(" Harga Skin Care harus bernilai positif, mohon coba kembali!");
+                        }
+                    }catch (NumberFormatException e) {
+                        System.out.println(" Harga Skin Care tidak valid, mohon coba kembali!");
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.print(" Kuantitas         : "); kuantitasSC = Integer.parseInt(baca.readLine());
+                        if (kuantitasSC > 0){
+                            break;
+                        } else if (kuantitasSC < 0) {
+                            System.out.println(" Kuantitas Skin Care harus bernilai positif, mohon coba kembali!");
+                        }
+                    }catch (NumberFormatException e) {
+                        System.out.println(" Kuantitas Skin Care tidak valid, mohon coba kembali!");
+                    }
+                }
+                System.out.println("----------------------------------------------------------------");
+                System.out.print("Telah tersertifikasi BPOM? [y/t] : "); String serti = baca.readLine();
+                if (serti.equals("Y") || serti.equals("y")){
+                    String sertifikasiSC = info.certifiedDone;
+                    for(int i = 0; i < data1.size(); i++){
+                        data1.get(i).createDone(namaSC);
+                    }
+                    info.notifySuccessCreate();
+                    Skincare newDataSC = new Skincare(idSC, namaSC, merkSC, hargaSC, kuantitasSC, sertifikasiSC, tipeSC, jenkulSC);
+                    data1.add(newDataSC);
                     break;
-                }
-            }
-            System.out.print(" Nama              : "); String namaSC = baca.readLine();
-            System.out.print(" Merk              : "); String merkSC = baca.readLine();
-            System.out.print(" Tipe              : "); String tipeSC = baca.readLine();
-            System.out.print(" Untuk Jenis Kulit : "); String jenkulSC = baca.readLine();
-            while (true) {
-                try {
-                    System.out.print(" Harga             : "); hargaSC = Integer.parseInt(baca.readLine());
-                    if (hargaSC > 0){
-                        break;
-                    } else if (hargaSC < 0) {
-                        System.out.println(" Harga Skin Care harus bernilai positif, mohon coba kembali!");
+                }else if (serti.equals("T")||serti.equals("t")){
+                    String sertifikasiSC = info.noCertified;
+                    for(int i = 0; i < data1.size(); i++){
+                        data1.get(i).createDone(namaSC);
                     }
-                }catch (NumberFormatException e) {
-                    System.out.println(" Harga Skin Care tidak valid, mohon coba kembali!");
-                }
-            }
-            while (true) {
-                try {
-                    System.out.print(" Kuantitas         : "); kuantitasSC = Integer.parseInt(baca.readLine());
-                    if (kuantitasSC > 0){
-                        break;
-                    } else if (kuantitasSC < 0) {
-                        System.out.println(" Kuantitas Skin Care harus bernilai positif, mohon coba kembali!");
-                    }
-                }catch (NumberFormatException e) {
-                    System.out.println(" Kuantitas Skin Care tidak valid, mohon coba kembali!");
-                }
-            }
-            System.out.println("----------------------------------------------------------------");
-            System.out.print("Telah tersertifikasi BPOM? [y/t] : "); String serti = baca.readLine();
-            if (serti.equals("Y") || serti.equals("y")){
-                String sertifikasiSC = info.certifiedDone;
-                for(int i = 0; i < data1.size(); i++){
-                    data1.get(i).createDone(namaSC);
-                }
-                info.notifySuccessCreate();
-                Skincare newDataSC = new Skincare(idSC, namaSC, merkSC, hargaSC, kuantitasSC, sertifikasiSC, tipeSC, jenkulSC);
-                data1.add(newDataSC);
-            }else if (serti.equals("T")||serti.equals("t")){
-                String sertifikasiSC = info.noCertified;
-                for(int i = 0; i < data1.size(); i++){
-                    data1.get(i).createDone(namaSC);
-                }
-                info.notifySuccessCreate();
-                Skincare newDataSC = new Skincare(idSC, namaSC, merkSC, hargaSC, kuantitasSC, sertifikasiSC, tipeSC, jenkulSC);
-                data1.add(newDataSC);
-            }else{
-                info.failChoose();
-            }
-        }else if ("2".equals(tambah)) { //tambah data make up
-            System.out.println("----------------------------------------------------------------");
-            System.out.println("| DATA MAKE UP                                                 |");
-            System.out.println("----------------------------------------------------------------");
-            while (true) {
-                int cek = 0;
-                System.out.print(" ID        : "); idMU = baca.readLine();
-                for(Makeup dataMakeup : data2){
-                    if (dataMakeup.getIdMakeup().equals(idMU)) {
-                        System.out.println("ID Make Up sudah ada, mohon coba kembali!");
-                        cek = 1;
-                        break;
-                    }
-                }
-                if (cek == 0) {
+                    info.notifySuccessCreate();
+                    Skincare newDataSC = new Skincare(idSC, namaSC, merkSC, hargaSC, kuantitasSC, sertifikasiSC, tipeSC, jenkulSC);
+                    data1.add(newDataSC);
                     break;
+                }else{
+                    info.failChoose();
                 }
-            }
-            System.out.print(" Nama      : "); String namaMU = baca.readLine();
-            System.out.print(" Merk      : "); String merkMU = baca.readLine();
-            System.out.print(" Jenis     : "); String jenisMU = baca.readLine();
-            System.out.print(" Shade     : "); String shadeMU = baca.readLine();
-            while (true) {
-                try {
-                    System.out.print(" Harga     : "); hargaMU = Integer.parseInt(baca.readLine());
-                    if (hargaMU > 0){
-                        break;
-                    } else if (hargaMU < 0) {
-                        System.out.println(" Harga Make Up harus bernilai positif, mohon coba kembali!");
+            }else if (tambah == 2) { //tambah data make up
+                System.out.println("----------------------------------------------------------------");
+                System.out.println("| DATA MAKE UP                                                 |");
+                System.out.println("----------------------------------------------------------------");
+                while (true) {
+                    int cek = 0;
+                    System.out.print(" ID        : "); idMU = baca.readLine();
+                    for(Makeup dataMakeup : data2){
+                        if (dataMakeup.getIdMakeup().equals(idMU)) {
+                            System.out.println("ID Make Up sudah ada, mohon coba kembali!");
+                            cek = 1;
+                            break;
+                        }
                     }
-                }catch (NumberFormatException e) {
-                    System.out.println(" Harga Make Up tidak valid, mohon coba kembali!");
-                }
-            }
-            while (true) {
-                try {
-                    System.out.print(" Kuantitas : "); kuantitasMU = Integer.parseInt(baca.readLine());
-                    if (kuantitasMU > 0){
+                    if (cek == 0) {
                         break;
-                    } else if (kuantitasMU < 0) {
-                        System.out.println(" Kuantitas Make Up harus bernilai positif, mohon coba kembali!");
                     }
-                }catch (NumberFormatException e) {
-                    System.out.println(" Kuantitas Make Up tidak valid, mohon coba kembali!");
                 }
-            }
-            System.out.println("----------------------------------------------------------------");
-            System.out.print("Telah tersertifikasi BPOM? [y/t] : "); String serti = baca.readLine();
-            if (serti.equals("Y") || serti.equals("y")){
-                for(int i = 0; i < data2.size(); i++){
-                    data2.get(i).createDone(namaMU);
+                System.out.print(" Nama      : "); String namaMU = baca.readLine();
+                System.out.print(" Merk      : "); String merkMU = baca.readLine();
+                System.out.print(" Jenis     : "); String jenisMU = baca.readLine();
+                System.out.print(" Shade     : "); String shadeMU = baca.readLine();
+                while (true) {
+                    try {
+                        System.out.print(" Harga     : "); hargaMU = Integer.parseInt(baca.readLine());
+                        if (hargaMU > 0){
+                            break;
+                        } else if (hargaMU < 0) {
+                            System.out.println(" Harga Make Up harus bernilai positif, mohon coba kembali!");
+                        }
+                    }catch (NumberFormatException e) {
+                        System.out.println(" Harga Make Up tidak valid, mohon coba kembali!");
+                    }
                 }
-                info.notifySuccessCreate();
-                String sertifikasiMU = info.certifiedDone;
-                Makeup newDataMU = new Makeup(idMU, namaMU, merkMU, hargaMU, kuantitasMU, sertifikasiMU,jenisMU, shadeMU);
-                data2.add(newDataMU);
-            }else if (serti.equals("T")||serti.equals("t")){
-                String sertifikasiMU = info.noCertified;
-                for(int i = 0; i < data2.size(); i++){
-                    data2.get(i).createDone(namaMU);
+                while (true) {
+                    try {
+                        System.out.print(" Kuantitas : "); kuantitasMU = Integer.parseInt(baca.readLine());
+                        if (kuantitasMU > 0){
+                            break;
+                        } else if (kuantitasMU < 0) {
+                            System.out.println(" Kuantitas Make Up harus bernilai positif, mohon coba kembali!");
+                        }
+                    }catch (NumberFormatException e) {
+                        System.out.println(" Kuantitas Make Up tidak valid, mohon coba kembali!");
+                    }
                 }
-                info.notifySuccessCreate();
-                Makeup newDataMU = new Makeup(idMU, namaMU, merkMU, hargaMU, kuantitasMU, sertifikasiMU,jenisMU, shadeMU);
-                data2.add(newDataMU);
+                System.out.println("----------------------------------------------------------------");
+                System.out.print("Telah tersertifikasi BPOM? [y/t] : "); String serti = baca.readLine();
+                if (serti.equals("Y") || serti.equals("y")){
+                    for(int i = 0; i < data2.size(); i++){
+                        data2.get(i).createDone(namaMU);
+                    }
+                    info.notifySuccessCreate();
+                    String sertifikasiMU = info.certifiedDone;
+                    Makeup newDataMU = new Makeup(idMU, namaMU, merkMU, hargaMU, kuantitasMU, sertifikasiMU,jenisMU, shadeMU);
+                    data2.add(newDataMU);
+                    break;
+                }else if (serti.equals("T")||serti.equals("t")){
+                    String sertifikasiMU = info.noCertified;
+                    for(int i = 0; i < data2.size(); i++){
+                        data2.get(i).createDone(namaMU);
+                    }
+                    info.notifySuccessCreate();
+                    Makeup newDataMU = new Makeup(idMU, namaMU, merkMU, hargaMU, kuantitasMU, sertifikasiMU,jenisMU, shadeMU);
+                    data2.add(newDataMU);
+                    break;
+                }else{
+                    info.failChoose();
+                } 
+            }else if(tambah == 3){
+                break;
             }else{
-                info.failChoose();
-            } 
-        }else{
-            info.notifyFailCreate();
-        }
+                info.notifyFailCreate();
+            }
+            
+        } while (tambah != 3);
     }
 
     //Read Data
