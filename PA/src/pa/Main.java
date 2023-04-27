@@ -963,8 +963,8 @@ public class Main{
 
     public static void main(String[] args) throws IOException {
         // TAMBAH DATA AWAL
-        Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
-        data1.add(newDataSC);
+        // Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
+        // data1.add(newDataSC);
         // Skincare newDataSC2 = new Skincare("2", "Azarine Night Cream Moisturizer", "Azarine", 47000, 1200, "Tidak Ada", "Moisturizer", "Sensitif");
         // data1.add(newDataSC2);
         // Makeup newDataMU = new Makeup("1", "Creamatte Lip Cream", "Emina", 47500, 200, "Ada", "Lipstick", "Fuzzy Muzzy");
