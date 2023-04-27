@@ -802,31 +802,36 @@ public class Main{
         }
     }
 
-        public static void loginFormUser() throws IOException{
+     public static void loginFormUser() throws IOException{
             Scanner input = new Scanner(System.in);
             String username, password;
-            File path = new File("PA/src/pa/akun.csv");
-            Scanner myreader = new Scanner(path);
             Boolean _found = false;
-            while (myreader.hasNextLine()){
-                System.out.println("""
-                \n****************************************************************
-                                         Beauty Shop
-                ****************************************************************
-                                      Welcome Login Page 
-                ================================================================""");
-                System.out.print("Masukkan username: ");
-                username = input.nextLine();
-                System.out.println("================================================================");
-                System.out.print("Masukkan password: ");
-                password = input.nextLine();
-                String data = myreader.next();
-                String[] file = data.split(",");
-                if (file[0].equals(username) && file[1].equals(password)){
+            System.out.println("""
+            \n****************************************************************
+                                       Beauty Shop
+            ****************************************************************
+                                    Welcome Login Page 
+            ================================================================""");
+            System.out.print("Masukkan username: ");
+            username = input.nextLine();
+            System.out.println("================================================================");
+            System.out.print("Masukkan password: ");
+            password = input.nextLine();
+            Scanner scanner = new Scanner(Files.newBufferedReader(Paths.get("src/pa/akun.csv")));
+            scanner.useDelimiter(",");
+
+            while (scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+                String fileUsername = parts[0];
+                String filePassword = parts[1];
+                if (username.equals(fileUsername) && password.equals(filePassword)){
                     _found = true;
+                    break;
                 }
+            }
+                 scanner.close();
                 if (_found == true){
-                    myreader.hasNext();
                     System.out.println("================================================================");
                     System.out.println("              ANDA BERHASIL LOGIN SEBAGAI USER");
                     int pilihan = 0;
@@ -837,102 +842,99 @@ public class Main{
                         ****************************************************************
                                                Main Menu User
                         ================================================================
-                        1. Keranjang Pembelian
+                        1. Pesan Data Kosmetik
                         2. Atur Keranjang
-                        3. Lakukan Pembelian
+                        3. Lakukan Pemesanan
                         4. Keluar
                         ================================================================""");
                         System.out.print(" Pilihan Anda [1-4]: ");
-                        try {
-                            pilihan = Integer.parseInt(baca.readLine());
+                        pilihan = Integer.parseInt(baca.readLine());
 
-                            switch (pilihan) {
-                                case 1:
-                                    //Tambah Keranjang
-                                    createDataKeranjang();
-                                    break;
-                                case 2:
-                                    //Cek Keranjang
-                                    do {
-                                        System.out.println("""
-                                        ****************************************************************
-                                                                 Beauty Shop
-                                        ****************************************************************
-                                                                  Keranjang
-                                        ================================================================
-                                        1. Ubah Jumlah Barang
-                                        2. Hapus Barang
-                                        3. Kembali
-                                        ================================================================""");
-                                        System.out.print(" Pilihan Anda [1-3]: ");
-                                        pilihan = Integer.parseInt(baca.readLine());
-                                        switch(pilihan){
-                                            case 1 :
-                                                //ubah jumlah barang
-                                                updateDataKeranjang();
-                                                break;
-                                            case 2 :
-                                                //hapus barang
-                                                deleteDataKeranjang();
-                                                break;
-                                            case 3 :
-                                                break;
-                                        }
-                                    } while(pilihan!= 3);
-                                case 3:
-                                    //Pemesanan
-                                    readDataKeranjang();
-                                    break;
-                                case 4:
-                                    //keluar
-                                    System.out.println("================================================================");
-                                    System.out.println("                       Terima Kasih");
-                                    System.out.println("================================================================");
-                                    break;
-                                default:
-                                    System.out.println("================================================================");
-                                    System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
-                                    break;
-                            }
-                        }catch (NumberFormatException e) {
-                            System.out.println(" Inputan harus di isi dengan angka, mohon coba kembali!");
+                        switch (pilihan) {
+                            case 1:
+                                //Tambah Keranjang
+                                createDataKeranjang();
+                                break;
+                            case 2:
+                                //Cek Keranjang
+                                do {
+                                    System.out.println("""
+                                    ****************************************************************
+                                                             Beauty Shop
+                                    ****************************************************************
+                                                              Keranjang
+                                    ================================================================
+                                    1. Ubah Jumlah Barang
+                                    2. Hapus Barang
+                                    3. Keluar
+                                    ================================================================""");
+                                    System.out.print(" Pilihan Anda [1-3]: ");
+                                    pilihan = Integer.parseInt(baca.readLine());
+                                    switch(pilihan){
+                                        case 1 :
+                                            //ubah jumlah barang
+                                            updateDataKeranjang();
+                                            break;
+                                        case 2 :
+                                            //hapus barang
+                                            deleteDataKeranjang();
+                                            break;
+                                        case 3 :
+                                            break;
+                                    }
+                                } while(pilihan!= 3);
+                            case 3:
+                                //Pemesanan
+                                readDataKeranjang();
+                                break;
+                            case 4:
+                                //keluar
+                                System.out.println("================================================================");
+                                System.out.println("                       Terima Kasih");
+                                System.out.println("================================================================");
+                                break;
+                            default:
+                                System.out.println("================================================================");
+                                System.out.println(" Inputan tidak ditemukan, mohon coba kembali!");
+                                break;
                         }
                     } while (pilihan != 4);
                 }else {
                     System.out.println("================================================================");
                     System.out.println("                USERNAME ATAU PASSWORD SALAH!                   ");
                     System.out.println("      >>> SILAHKAN MASUKAN PASSWORD DAN USERNMAE YANG BENAR <<< ");
-                    break;
                 }
-                myreader.close();
-                break;
-            }
     }
     
     
     static void Registrasi()throws IOException{
         Scanner input = new Scanner(System.in);
         String username, password;
-        System.out.println("""
-        \n****************************************************************
-                                 Beauty Shop
-        ****************************************************************
-                               Registrasi Akun 
-        ================================================================""");
-        System.out.print("Masukkan username: ");
-        username = input.nextLine();
-        System.out.println("================================================================");
-        System.out.print("Masukkan password: ");
-        password = input.nextLine();
-        List <List<String>> dataDummy = Arrays.asList(
-        Arrays.asList(username,password)
-        );
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("src/pa/akun.csv"));
-            for (List<String> data : dataDummy ) {
-                writer.write(String.join(",", data));
-                writer.newLine();
+        BufferedWriter writer = Files.newBufferedWriter(Paths.get("PA/src/pa/akun.csv"));
+        for (int i = 0;i < 10 ;i++){
+            System.out.println("""
+            \n****************************************************************
+                                       Beauty Shop
+            ****************************************************************
+                                     Registrasi Akun 
+            ================================================================""");
+            System.out.print("Masukkan username: ");
+            username = input.nextLine();
+            System.out.println("================================================================");
+            System.out.print("Masukkan password: ");
+            password = input.nextLine();
+            writer.append(username);
+            writer.append(",");
+            writer.append(password);
+            writer.append("\n");
+            writer.flush();
+            System.out.println("Apakah ingin mendaftarkan akun lagi? (Y/N)");
+            String choice = input.nextLine();
+            if (choice.equalsIgnoreCase("n")) {
+                break;
             }
-            writer.close();
+        }
+        writer.close();
     }
 
     public static void main(String[] args) throws IOException {
