@@ -529,6 +529,16 @@ public class Main{
                     System.out.print("\nApakah anda yakin ingin melakukan pembelian? [y/t]: ");
                     String konfirmasi = baca.readLine();
                     if (konfirmasi.equals("y") || konfirmasi.equals("Y")) {
+                        for(KeranjangSC dataSkincare : keranjangSC){
+                            String namaSC = dataSkincare.getNama();
+                            int jumlahBeli = dataSkincare.getKuantitas();
+                            for(Skincare dataSC : data1){
+                                if(dataSC.getNama().equals(namaSC)){
+                                    int newStok = dataSC.getKuantitas() - jumlahBeli;
+                                    dataSC.setKuantitas(newStok);
+                                }
+                            }
+                        }
                         System.out.println("\n ***TRANSAKSI BERHASIL*** ");
                     }else if(konfirmasi.equals("t") || konfirmasi.equals("T")){
                         System.out.println("\n ***TRANSAKSI BATAL*** ");
@@ -554,6 +564,16 @@ public class Main{
                     System.out.print("\nApakah anda ingin membeli kosmetik tersebut [y/t]: ");
                     String konfirmasi = baca.readLine();
                     if (konfirmasi.equals("y") || konfirmasi.equals("Y")) {
+                        for(KeranjangMU dataMakeup : keranjangMU){
+                            String namaMU = dataMakeup.getNama();
+                            int jumlahBeli = dataMakeup.getKuantitas();
+                            for(Makeup dataMU : data2){
+                                if(dataMU.getNama().equals(namaMU)){
+                                    int newStok = dataMU.getKuantitas() - jumlahBeli;
+                                    dataMU.setKuantitas(newStok);
+                                }
+                            }
+                        }
                         System.out.println("\n*** TRANSAKSI BERHASIL ***");
                     }else if(konfirmasi.equals("t") || konfirmasi.equals("T")){
                         System.out.println("\n*** TRANSAKSI BATAL ***");
@@ -943,8 +963,8 @@ public class Main{
 
     public static void main(String[] args) throws IOException {
         // TAMBAH DATA AWAL
-        // Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
-        // data1.add(newDataSC);
+        Skincare newDataSC = new Skincare("1", "UV Moisture Gel", "Skin Aqua", 47000, 500, "Ada", "Sun Protection", "Berminyak");
+        data1.add(newDataSC);
         // Skincare newDataSC2 = new Skincare("2", "Azarine Night Cream Moisturizer", "Azarine", 47000, 1200, "Tidak Ada", "Moisturizer", "Sensitif");
         // data1.add(newDataSC2);
         // Makeup newDataMU = new Makeup("1", "Creamatte Lip Cream", "Emina", 47500, 200, "Ada", "Lipstick", "Fuzzy Muzzy");
